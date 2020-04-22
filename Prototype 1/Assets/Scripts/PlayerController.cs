@@ -1,9 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField]
+    private float _speed = 20;
+
     private void Start()
     {
         
@@ -11,6 +12,6 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        transform.Translate(Vector3.forward * Time.deltaTime * 20);
+        transform.Translate(Vector3.forward * Time.deltaTime * _speed);
     }
 }
