@@ -10,12 +10,19 @@ public class SpawnManager : MonoBehaviour {
     [SerializeField]
     private float _repeateRate = 2;
 
-    private void Start() {
-        InvokeRepeating(nameof(SpawnObstacle), _startDelay, _repeateRate);
+    private PlayerController _playerController;
+
+    private void Awake() {
+        _playerController = FindObjectOfType<PlayerController>();
     }
 
-    // Update is called once per frame
+    private void Start() {
+        Invoke(nameof(SpawnObstacle), _startDelay);
+    }
+
     private void SpawnObstacle() {
+        if(_playerController.GameOver) { return; }
         Instantiate(_obstaclePrefab, spawnPos, _obstaclePrefab.transform.rotation);
+        Invoke(nameof(SpawnObstacle), _repeateRate);
     }
 }

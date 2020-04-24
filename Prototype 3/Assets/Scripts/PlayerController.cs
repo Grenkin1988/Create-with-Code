@@ -3,11 +3,14 @@
 public class PlayerController : MonoBehaviour {
     private Rigidbody _rigidbody;
     private bool isOnGround = true;
+    
 
     [SerializeField]
     private float _jumpForce = 12;
     [SerializeField]
     private float _gravityModifier = 2;
+
+    public bool GameOver { get; private set; }
 
     private void Start() {
         _rigidbody = GetComponent<Rigidbody>();
@@ -22,6 +25,12 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void OnCollisionEnter(Collision collision) {
-        isOnGround = true;
+        
+        if (collision.gameObject.CompareTag("Ground")) {
+            isOnGround = true;
+        } else if (collision.gameObject.CompareTag("Obstacle")) {
+            GameOver = true;
+            Debug.Log("Game Over!");
+        }
     }
 }
