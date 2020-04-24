@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 58542934793557217}
   - component: {fileID: 58542934294648372}
   - component: {fileID: 114831301192155566}
+  - component: {fileID: 362176572}
+  - component: {fileID: 362176571}
   m_Layer: 0
   m_Name: CarrotProjectile
   m_TagString: Untagged
@@ -106,3 +108,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _topBound: 30
   _lowerBound: -10
+--- !u!65 &362176572
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 58542934791527075}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.14170074, y: 0.141707, z: 0.61012447}
+  m_Center: {x: 0, y: 0.0708535, z: -0.000000059604645}
+--- !u!54 &362176571
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 58542934791527075}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
