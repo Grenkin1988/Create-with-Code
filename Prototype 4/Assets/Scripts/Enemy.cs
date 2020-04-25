@@ -6,6 +6,8 @@ public class Enemy : MonoBehaviour {
 
     [SerializeField]
     private float moveSpeed = 3;
+    [SerializeField]
+    private float destronBelowY = -10;
 
     private void Awake() {
         enemyRigidbody = GetComponent<Rigidbody>();
@@ -16,6 +18,9 @@ public class Enemy : MonoBehaviour {
     }
 
     private void Update() {
+        if(transform.position.y < destronBelowY) {
+            Destroy(gameObject);
+        }
         var lookDirection = player.transform.position - transform.position;
         enemyRigidbody.AddForce(lookDirection.normalized * moveSpeed);
     }
