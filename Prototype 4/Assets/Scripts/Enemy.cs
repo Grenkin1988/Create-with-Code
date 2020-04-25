@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour {
     }
 
     private void Update() {
+        if (player.IsGameOver) { return; }
         if(transform.position.y < destronBelowY) {
             Destroy(gameObject);
         }

@@ -16,6 +16,11 @@ public class PlayerController : MonoBehaviour {
     [SerializeField]
     private float powerUpDuration = 7;
 
+    [SerializeField]
+    private float gameOverBelowY = -10;
+
+    public bool IsGameOver { get; private set; }
+
     private void Awake() {
         playerRigidbody = GetComponent<Rigidbody>();
     }
@@ -25,10 +30,15 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Update() {
+        if (IsGameOver) { return; }
         float forward = Input.GetAxis("Vertical");
         playerRigidbody.AddForce(focalPoint.transform.forward * moveSpped * forward);
 
         powerupIndicator.transform.position = transform.position + new Vector3(0, -0.5f, 0);
+
+        if (transform.position.y < gameOverBelowY) {
+            IsGameOver = true;
+        }
     }
 
     private void OnTriggerEnter(Collider other) {

@@ -12,7 +12,10 @@ public class SpawnManager : MonoBehaviour {
     private int enemyCount;
     private int waveNumber = 1;
 
+    private PlayerController player;
+
     private void Start() {
+        player = FindObjectOfType<PlayerController>();
         SpawnEnemyWave(waveNumber);
     }
 
@@ -41,6 +44,7 @@ public class SpawnManager : MonoBehaviour {
     }
 
     private void Update() {
+        if (player.IsGameOver) { return; }
         enemyCount = FindObjectsOfType<Enemy>().Length;
         if(enemyCount == 0) {
             waveNumber++;
