@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6638494232723485257}
   m_Layer: 0
   m_Name: Good 1
-  m_TagString: Untagged
+  m_TagString: Good
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -121,8 +121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f19f1bd261e25d49a2b48b0cd0b025a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minSpeed: 12
-  maxSpeed: 16
+  minSpeed: 15
+  maxSpeed: 18
   maxTorque: 10
   xRange: 4
   ySpawnPos: -6

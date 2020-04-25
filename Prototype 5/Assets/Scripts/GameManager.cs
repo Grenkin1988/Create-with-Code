@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System;
 
 public class GameManager : MonoBehaviour {
     [SerializeField]
@@ -14,23 +15,35 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     private TextMeshProUGUI scoreText;
     private int score;
+
+    [SerializeField]
+    private GameObject titleScreen;
+
     [SerializeField]
     private TextMeshProUGUI gameOverText;
     [SerializeField]
     private Button restartButton;
 
-    public bool IsGameActive { get; private set; } = true;
+    public bool IsGameActive { get; private set; }
 
     private void Start() {
-        StartCoroutine(SpawnTarget());
+    }
+
+    public void StartGame(int difficulty) {
+        IsGameActive = true;
         score = 0;
+        spawnRate /= difficulty;
+        
+        StartCoroutine(SpawnTarget());
         UpdateScore(0);
+
+        titleScreen.SetActive(false);
     }
 
     IEnumerator SpawnTarget() {
         while (IsGameActive) {
             yield return new WaitForSeconds(spawnRate);
-            int index = Random.Range(0, targets.Count);
+            int index = UnityEngine.Random.Range(0, targets.Count);
             Instantiate(targets[index]);
             UpdateScore(5);
         }
