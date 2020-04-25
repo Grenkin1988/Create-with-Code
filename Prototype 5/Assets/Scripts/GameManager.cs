@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
     [SerializeField]
@@ -12,6 +14,12 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     private TextMeshProUGUI scoreText;
     private int score;
+    [SerializeField]
+    private TextMeshProUGUI gameOverText;
+    [SerializeField]
+    private Button restartButton;
+
+    public bool IsGameActive { get; private set; } = true;
 
     private void Start() {
         StartCoroutine(SpawnTarget());
@@ -19,12 +27,8 @@ public class GameManager : MonoBehaviour {
         UpdateScore(0);
     }
 
-    private void Update() {
-
-    }
-
     IEnumerator SpawnTarget() {
-        while (true) {
+        while (IsGameActive) {
             yield return new WaitForSeconds(spawnRate);
             int index = Random.Range(0, targets.Count);
             Instantiate(targets[index]);
@@ -35,5 +39,15 @@ public class GameManager : MonoBehaviour {
     public void UpdateScore(int scoreToAdd) {
         score += scoreToAdd;
         scoreText.text = $"Score: {score}";
+    }
+
+    public void GameOver() {
+        IsGameActive = false;
+        gameOverText.gameObject.SetActive(true);
+        restartButton.gameObject.SetActive(true);
+    }
+
+    public void RestartGame() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
