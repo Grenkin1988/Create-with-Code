@@ -47,11 +47,12 @@ public class PlayerControllerX : MonoBehaviour {
             GameOver = true;
             Debug.Log("Game Over!");
             Destroy(other.gameObject);
-        } else if (other.gameObject.CompareTag("Money")) {
+            Destroy(gameObject, 10);
+        } else if (other.gameObject.CompareTag("Money") && !GameOver) {
             fireworksParticle.Play();
             playerAudio.PlayOneShot(moneySound, 1.0f);
             Destroy(other.gameObject);
-        } else if (other.gameObject.CompareTag("Ground")) {
+        } else if (other.gameObject.CompareTag("Ground") && !GameOver) {
             playerAudio.PlayOneShot(floorSound, 1.0f);
             playerRb.AddForce(Vector3.up * 15, ForceMode.Impulse);
         }
