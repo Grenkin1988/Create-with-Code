@@ -2,12 +2,19 @@
 
 public class Target : MonoBehaviour {
     private Rigidbody targetRb;
+    private GameManager gameManager;
 
     [SerializeField] private float minSpeed = 12;
     [SerializeField] private float maxSpeed = 16;
     [SerializeField] private float maxTorque = 10;
     [SerializeField] private float xRange = 4;
     [SerializeField] private float ySpawnPos = -6;
+
+    [SerializeField]
+    private int pointValue = 10;
+
+    [SerializeField]
+    private ParticleSystem explosionParticle;
 
     private void Awake() {
         targetRb = GetComponent<Rigidbody>();
@@ -20,6 +27,8 @@ public class Target : MonoBehaviour {
             RandomTorque(),
             RandomTorque(), ForceMode.Impulse);
         transform.position = RandomSpawnPos();
+
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     private void Update() {
@@ -27,15 +36,13 @@ public class Target : MonoBehaviour {
     }
 
     private void OnMouseDown() {
-        DestroyThis();
-    }
-
-    private void DestroyThis() { 
         Destroy(gameObject);
+        Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
+        gameManager.UpdateScore(pointValue);
     }
 
     private void OnTriggerEnter(Collider other) {
-        DestroyThis();
+        Destroy(gameObject);
     }
 
     private Vector3 RandomForce() =>
